@@ -7,12 +7,12 @@ import cookieParser from 'cookie-parser'
 import notificationRoutes from "./routes/notificationRoutes.js";
 import "./notificationScheduler.js"; // Import scheduler to start it
 dotenv.config()
-const PORT= process.env.PORT
+const PORT= process.env.PORT || 8000
 const app=express()
 DbCon()
 app.use(cors({
-    origin: 'http://localhost:5173', // Match your frontend's origin EXACTLY
-    credentials: true // Allow cookies to be sent and received
+  origin: process.env.CLIENT_URL || 'http://localhost:5173', // Match your frontend's origin EXACTLY
+    credentials: true 
   }));
 app.use("/notifications", notificationRoutes);
 // Use cookie-parser middleware
